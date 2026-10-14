@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/login",
-                                "/auth/register")
+                                "/auth/registrar")
                         .permitAll()
                         .anyRequest().authenticated())
                 .build();
