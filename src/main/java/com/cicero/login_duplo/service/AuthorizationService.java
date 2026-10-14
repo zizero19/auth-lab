@@ -12,13 +12,14 @@ public class AuthorizationService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
 
-    private AuthorizationService(UsuarioRepository usuarioRepository) {
+    public AuthorizationService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findByLogin(username);
+        return usuarioRepository.findByLogin(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
     }
 
 }
