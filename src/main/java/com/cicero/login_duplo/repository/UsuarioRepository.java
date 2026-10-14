@@ -7,4 +7,6 @@ import com.cicero.login_duplo.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByLogin(String login);
+
+    boolean existsByLogin(String login);
 }
