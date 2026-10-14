@@ -1,0 +1,9 @@
+package com.cicero.login_duplo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cicero.login_duplo.model.Usuario;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+
+}
