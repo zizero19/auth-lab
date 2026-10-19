@@ -1,6 +1,7 @@
 package com.cicero.login_duplo.service;
 
 import com.cicero.login_duplo.dto.LoginRequest;
+import com.cicero.login_duplo.dto.LoginResponse;
 import com.cicero.login_duplo.dto.RegisterRequest;
 import com.cicero.login_duplo.model.Usuario;
 import com.cicero.login_duplo.model.enums.AuthProvider;
@@ -22,14 +23,17 @@ public class AuthService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
     public AuthService(
             UsuarioRepository usuarioRepository,
             PasswordEncoder passwordEncoder,
-            AuthenticationManager authenticationManager) {
+            AuthenticationManager authenticationManager,
+            TokenService tokenService) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.tokenService = tokenService;
     }
 
     @Transactional
@@ -52,10 +56,16 @@ public class AuthService {
         usuarioRepository.save(usuario);
     }
 
-    public void login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
 
-        Authentication credentials = new UsernamePasswordAuthenticationToken(request.login(), request.senha());
+        var credentials = new UsernamePasswordAuthenticationToken(
+                request.login(),
+                request.senha());
 
-        authenticationManager.authenticate(credentials);
+        Authentication authentication = authenticationManager.authenticate(credentials);
+
+        String token = tokenService.gerarToken(authentication);
+
+        return new LoginResponse(token);
     }
 }
