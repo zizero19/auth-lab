@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "AuthLab",
+      "request": "launch",
+      "mainClass": "com.cicero.login_duplo.LoginDuploApplication",
+      "cwd": "${workspaceFolder}/backend",
+      "env": {
+        "JWT_SECRET": "xjDgh/88qaYgCjhIz2h9BaoqdPFuyB4fcRNMSNOemwc="
+      }
+    }
+  ]
+}
