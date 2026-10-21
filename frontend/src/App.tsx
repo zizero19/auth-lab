@@ -79,54 +79,89 @@ function App() {
 
   if (usuario !== null) {
     return (
-      <main>
-        <h1>Olá, {usuario.nome}!</h1>
-        <p>Seu login: {usuario.login}</p>
+      <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-slate-100">
+        <section className="w-full max-w-sm rounded-2xl border border-slate-700 bg-slate-900 p-8 shadow-xl">
+          <p className="mb-2 text-sm font-medium text-indigo-400">
+            AuthLab
+          </p>
 
-        <button
-          type="button"
-          onClick={() => {
-            setUsuario(null)
-            setLogin('')
-            setSenha('')
-          }}
-        >
-          Sair
-        </button>
+          <h1 className="text-3xl font-bold">
+            Olá, {usuario.nome}!
+          </h1>
+
+          <p className="mt-3 break-words text-slate-300">
+            Seu login: {usuario.login}
+          </p>
+
+          <button
+            type="button"
+            onClick={() => {
+              setUsuario(null)
+              setLogin('')
+              setSenha('')
+              setErro('')
+            }}
+            className="mt-8 w-full cursor-pointer rounded-lg border border-slate-600 px-4 py-3 font-semibold transition-colors hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+          >
+            Sair
+          </button>
+        </section>
       </main>
     )
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h1>Entrar</h1>
+    <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-slate-100">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full max-w-sm flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900 p-8 shadow-xl"
+      >
+        <h1 className="text-3xl font-bold">Entrar</h1>
 
-        <label htmlFor="login">Login</label>
+        <label htmlFor="login" className="text-sm font-medium text-slate-300">
+          Login
+        </label>
         <input
           id="login"
           type="text"
           autoComplete="username"
           value={login}
           onChange={(event) => setLogin(event.target.value)}
+          className="w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          placeholder="Digite seu login"
         />
 
-        <label htmlFor="senha">Senha</label>
+        <label htmlFor="senha" className="text-sm font-medium text-slate-300">
+          Senha
+        </label>
         <input
           id="senha"
           type="password"
           autoComplete="current-password"
           value={senha}
           onChange={(event) => setSenha(event.target.value)}
+          className="w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          placeholder="Digite sua senha"
         />
 
-        {erro !== '' && <p role="alert">{erro}</p>}
+        {erro !== '' && (
+          <p
+            role="alert"
+            className="rounded-lg border border-red-800 bg-red-950 p-3 text-sm text-red-200"
+          >
+            {erro}
+          </p>
+        )}
 
-        <button type="submit" disabled={carregando}>
+        <button
+          type="submit"
+          disabled={carregando}
+          className="mt-2 w-full cursor-pointer rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+        >
           {carregando ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
-    </>
+    </main>
   )
 }
 
