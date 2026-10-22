@@ -1,73 +1,33 @@
-# React + TypeScript + Vite
+# AuthLab — interface de autenticação
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface React + TypeScript com visual predominantemente branco com acentos azuis. O layout se adapta a celulares, mantém foco de teclado visível e respeita a preferência por movimento reduzido.
 
-Currently, two official plugins are available:
+## Executar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+cd frontend
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Abra o endereço informado pelo Vite (normalmente http://localhost:5173). A API deve estar em http://localhost:8080 para autenticar: o servidor de desenvolvimento encaminha `/auth` e `/api` para ela. Consulte o README da raiz para configurar PostgreSQL e JWT_SECRET.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Fluxo preservado
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+O formulário envia `{ login, senha }` para `POST /auth/login`, recebe o token e consulta `GET /api/usuarios/me` com `Authorization: Bearer`. As credenciais continuam em estado local, sem persistência do token no navegador. A tela autenticada exibe nome e login e permite sair. O backend não foi alterado.
+
+## Logo
+
+`public/authlab-logo.svg` é uma marca vetorial transparente provisória em azul, usada como imagem no cartão. O PNG da conversa anterior não estava disponível no workspace nem nos anexos retornados pela conversa; essa marca não é a imagem original.
+
+Para integrar a original, copie o PNG transparente para `public/authlab-logo.png` e substitua a referência `/authlab-logo.svg` em `src/App.tsx` por `/authlab-logo.png`. Ajuste largura/altura à proporção real da imagem. Não converta para JPEG, pois ele não preserva transparência.
+
+## Validar
+
+```powershell
+npm run lint
+npm run build
+npm run preview
 ```
+
+O preview serve o build estático; a configuração de proxy atual é para desenvolvimento. Para hospedar o build, configure o servidor para encaminhar `/auth` e `/api` à API no mesmo domínio.

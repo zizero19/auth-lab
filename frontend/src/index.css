@@ -1,1 +1,72 @@
 @import "tailwindcss";
+
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #172b4d;
+  background: #f7faff;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+
+.auth-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px 20px;
+}
+
+.access-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 36px 32px;
+  background: #ffffff;
+  border: 1px solid #dce8f7;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px #278cff0d;
+}
+
+.card-logo { display: block; width: 220px; max-width: 100%; height: auto; margin: 0 auto 32px; }
+.access-card h1 { margin: 0 0 8px; font-size: 24px; font-weight: 650; overflow-wrap: anywhere; }
+.card-description { margin: 0 0 28px; color: #596b84; font-size: 13px; line-height: 1.6; }
+.field { margin-bottom: 20px; }
+.field label { display: block; margin-bottom: 8px; color: #253e60; font-size: 13px; font-weight: 600; }
+.field input {
+  width: 100%;
+  padding: 13px 14px;
+  background: #ffffff;
+  border: 1px solid #c7d6e8;
+  border-radius: 6px;
+  color: #172b4d;
+  font-size: 14px;
+}
+.field input::placeholder { color: #65758b; }
+.field input:focus { outline: none; border-color: #278cff; box-shadow: 0 0 0 3px #278cff24; }
+.primary-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 16px;
+  border: 1px solid #176dcc;
+  border-radius: 6px;
+  background: #176dcc;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary-button:hover:not(:disabled) { background: #125bb0; }
+.primary-button:focus-visible { outline: 2px solid #278cff; outline-offset: 4px; }
+.primary-button:disabled { opacity: .65; cursor: wait; }
+.error-message { padding: 12px; border: 1px solid #e5a4b1; border-radius: 6px; background: #fff1f4; color: #9c2340; font-size: 13px; line-height: 1.5; }
+.user-login { color: #596b84; font-size: 14px; overflow-wrap: anywhere; margin-bottom: 24px; }
+
+@media (max-width: 440px) {
+  .access-card { padding: 28px 24px; }
+}
+
+
